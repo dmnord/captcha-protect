@@ -109,13 +109,13 @@ func CreateConfig() *Config {
 		GoodBots:                  []string{},
 		ExemptIPs:                 []string{},
 		ExemptUserAgents:          []string{},
-		ChallengeURL:              "/challenge",
-		ChallengeTmpl:             "challenge.tmpl.html",
+		ChallengeURL:              "https://cap.mital.kz/",
+		ChallengeTmpl:             "challenge_caps.tmpl.html",
 		ChallengeStatusCode:       0,
 		EnableStatsPage:           "false",
 		LogLevel:                  "INFO",
 		IPDepth:                   0,
-		CaptchaProvider:           "turnstile",
+		CaptchaProvider:           "capsjs",
 		Mode:                      "prefix",
 		EnableStateReconciliation: "false",
 	}
@@ -290,6 +290,12 @@ func NewCaptchaProtect(ctx context.Context, next http.Handler, config *Config, n
 			js:       "https://challenges.cloudflare.com/turnstile/v0/api.js",
 			key:      "cf-turnstile",
 			validate: "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+		}
+	case "capjs":
+		bc.captchaConfig = CaptchaConfig{
+			js:       config.ChallengeURL + "/assets/floating.js",
+			key:      "",
+			validate: config.ChallengeURL + "/" + config.SiteKey + "/siteverify",
 		}
 	default:
 		return nil, fmt.Errorf("invalid captcha provider: %s", config.CaptchaProvider)
