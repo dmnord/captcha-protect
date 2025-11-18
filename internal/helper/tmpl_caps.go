@@ -15,7 +15,7 @@ func GetDefaultCapJsTmpl() string {
     <cap-widget
       id="default"
       data-cap-api-endpoint="{{ .ChallengeURL }}">
-      onsolve="console.log(`Token: ${event.detail.token}`)"
+      onsolve="console.log('Token: ${event.detail.token}')"
     </cap-widget>
   </body>
 </html>`
