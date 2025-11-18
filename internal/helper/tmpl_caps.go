@@ -14,8 +14,8 @@ func GetDefaultCapJsTmpl() string {
     <p>One moment while we verify your network connection.</p>
     <cap-widget
       id="default"
-      data-cap-api-endpoint="{{ .ChallengeURL }}">
-      onsolve="console.log('Token: ${event.detail.token}')"
+      data-cap-api-endpoint="{{ .ChallengeURL }}"
+      onsolve="console.log('Token: ${event.detail.token}')">
     </cap-widget>
   </body>
 </html>`
